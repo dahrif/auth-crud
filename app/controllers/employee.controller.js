@@ -1,44 +1,71 @@
 const Employee = require('../models/employee.model.js');
+const bcrypt = require('bcrypt');
 
 // Create and Save a new Employee
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.username || !req.body.password || !req.body.email ) {
+    if (!req.body.username || !req.body.password || !req.body.email) {
         return res.status(400).send({
             message: "Enter all the required fields"
         });
     }
     // Create a Employee
-    const employee = new Employee(req.body);
-    // Save Employee in the database
-    employee.save()
-        .then(data => {
-            res.redirect('/login');
-        }).catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while creating the Employee."
-            });
-        });
+    const employee = new Employee({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+    });
+
+
+    //hash password
+    bcrypt.genSalt(10, (err, salt) =>
+        bcrypt.hash(employee.password, salt,
+            (err, hash) => {
+                if (err) throw err;
+                //save pass to hash
+                employee.password = hash;
+                //save employee
+                employee.save()
+                    .then((value) => {
+                        console.log(value)
+                        res.redirect('/login');
+                    })
+                    .catch(value => console.log(value));
+
+            }));
 };
 
 exports.add = (req, res) => {
     // Validate request
-    if (!req.body.username || !req.body.password || !req.body.email ) {
+    if (!req.body.username || !req.body.password || !req.body.email) {
         return res.status(400).send({
             message: "Enter all the required fields"
         });
     }
     // Create a Employee
-    const employee = new Employee(req.body);
-    // Save Employee in the database
-    employee.save()
-        .then(data => {
-            res.redirect('/home');
-        }).catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while creating the Employee."
-            });
-        });
+    const employee = new Employee({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+    });
+
+
+    //hash password
+    bcrypt.genSalt(10, (err, salt) =>
+        bcrypt.hash(employee.password, salt,
+            (err, hash) => {
+                if (err) throw err;
+                //save pass to hash
+                employee.password = hash;
+                //save employee
+                employee.save()
+                    .then((value) => {
+                        console.log(value)
+                        res.redirect('/home');
+                    })
+                    .catch(value => console.log(value));
+
+            }));
 };
 
 // Retrieve and return all employee from the database.
@@ -54,7 +81,7 @@ exports.findAll = (req, res) => {
 };
 
 // Find a single employee with a EmployeeId
-exports.findOne =  (req, res) => {
+exports.findOne = (req, res) => {
     Employee.findById(req.params.id)
         .then(employee => {
             if (!employee) {

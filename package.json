@@ -1,31 +1,29 @@
 {
-  "name": "sample_crud",
+  "name": "test",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js"
   },
-  "keywords": [
-    "Express",
-    "RestAPI",
-    "MongoDB",
-    "Mongoose",
-    "Employee"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dahrif/auth-crud.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dahrif/auth-crud/issues"
+  },
+  "homepage": "https://github.com/dahrif/auth-crud#readme",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "ejs": "^3.0.1",
-    "express": "^4.16.3",
-    "express-session": "^1.17.0",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
     "mongo": "^0.1.0",
-    "mongoose": "^5.7.5",
-    "node-instagram": "^4.3.0",
-    "nodemon": "^2.0.15",
-    "readable-stream": "^3.6.0",
-    "twit": "^2.2.11"
+    "mongoose": "^6.0.15",
+    "nodemon": "^2.0.15"
   }
 }
