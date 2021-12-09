@@ -23,7 +23,6 @@ passport.use(
     })
 );
 
-//almaceno en sesion el id del usuario
 passport.serializeUser((user, done) => {
     done(null, user.id)
 })
@@ -33,35 +32,3 @@ passport.deserializeUser((id, done) => {
         done(err, user)
     })
 })
-// student
-
-// passport.use(
-//     new LocalStrategy({ 
-//         usernameField : 'email', 
-//         passwordField : 'password', 
-//         passReqToCallback : true 
-//     }, async (req, email, password, done) => {
-//         const student = await Student.findOne({email: email})
-//         if(!student) {
-//             return done(null, false, {message: "student not found"})
-//         } else {
-//             const match = await student.comparePassword(password)
-//             if(match){
-//                 return done(null, student)
-//             } else {
-//                 return done(null, false, {message: "incorrect password"})
-//             }
-//         }
-//     })
-// );
-
-// //almaceno en sesion el id del usuario
-// passport.serializeUser((student, done) => {
-//     done(null, student.id)
-// })
-
-// passport.deserializeUser((id, done) => {
-//     User.findById(id, (err, user) => {
-//         done(err, user)
-//     })
-// })

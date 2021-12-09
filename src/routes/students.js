@@ -6,20 +6,6 @@ const passport = require('passport')
 const User = require('../models/User')
 
 
-router.get('/students/signin-students', (req, res)=>{
-    res.render('students/signin-students')
-})
-
-
-router.post('/students/signin-students', passport.authenticate('local', {
-    successRedirect: '',
-    failureRedirect: '/students/signin-students', 
-    failureFlash: true
-}))
-
-
-
-
 router.get('/students/add', isAuthenticated, (req, res)=>{
     res.render('students/new-students')
 })
@@ -43,7 +29,7 @@ router.post('/students/new-students', isAuthenticated, async(req, res)=>{
 
         if(emailExist){
             req.flash('error_msg', 'The Email exist')
-            res.redirect('students/new-students')
+            res.redirect('/students/add')
         }
 
         const newUser = new User({ 
@@ -58,31 +44,6 @@ router.post('/students/new-students', isAuthenticated, async(req, res)=>{
         res.redirect('/students')
     }
 })
-// router.post('/students/new-students', isAuthenticated, async(req, res)=>{
-//     const { name, email, password } = req.body
-//     const errors = []
-
-//     if(name === '' || email === ''|| password === ''){
-//         errors.push({text: 'please write name or email'})
-//         res.render('students/new-students', {
-//             errors,
-//             name,
-//             email,
-//             password
-//         })
-//     } else {
-//         const newStudent = new Student({ 
-//             name: req.body.name, 
-//             email: req.body.email,
-//             password:req.body.password
-//         })
-//         await newStudent.save()
-//         req.flash('success_msg', 'student Added Succesfully')
-//         res.redirect('/students')
-//     }
-// })
-
-
 
 // 
 router.get('/students', isAuthenticated, async(req, res)=>{

@@ -9,17 +9,10 @@
                     <p>{{email}}</p>
                     <form action="/students/delete/{{_id}}?_method=DELETE" method="POST">
                         <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn btn-danger btn-block btn-sm" type="submit">Eliminar</button>
+                        <button class="btn btn-danger btn-block btn-sm" type="submit">Delete</button>
                     </form>
                 </div>
             </div>
-        </div>
-    {{else}}
-        <div class="card mx-auto">
-            <div class="card-body">
-                <p class="lead">There are not students yed</p>
-                <a href="/students/add" class="btn btn-success btn-block">Add sty</a>
-            </div>
-        </div>    
+        </div>  
     {{/each}}
 </div>
